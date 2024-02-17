@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="container jumbotron">
+    {% if registered %}
+        <strong>Thank You for Registering with Us.</strong>
+        <a href="{% url 'index' %}" class="btn-link btn">Return to the HomePage</a><br>
+    {% else %}
+        <strong class="display-3 mb-4">Register Here... </strong>
+        <form action="{% url 'register' %}" class="pt-3" method="POST">
+            {% csrf_token %}
+            {{ registration_form.as_p }}
+            <input type="submit" name="submit" value="Register" class="btn btn-success">
+            <a class="p-2 m-1" href="{% url 'login' %}">Already a Member? 
+                {# <a href="{% url 'login' %}">Sign In Here...</a> #}
+			</a>
+        </form>
+    {% endif %}
+</div>
+{% endblock %}
+
+{% load static %}
+
+
+
+{% comment %} <!doctype html>
+<html lang="en">
+  <head>
+  	<title>Login</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="{% static 'https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %}">
+	
+	<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+	</head>
+	<body> {% endcomment %}
+	{% comment %} <section class="ftco-section">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-md-6 text-center mb-5">
+					{% comment %} <h2 class="heading-section">Register here !!</h2> {% endcomment %}
+				{% comment %} </div>
+			</div>
+			<div class="row justify-content-center">
+				<div class="col-md-7 col-lg-5">
+					<div class="login-wrap p-4 p-md-5">
+		      	<div class="icon d-flex align-items-center justify-content-center">
+		      		<span class="fa fa-user-o"></span>
+		      	</div>
+		      	<h3 class="text-center mb-4">Sign Up</h3>
+						<form action="#" class="login-form">
+		      		<div class="form-group">
+		      			<input type="text" class="form-control rounded-left" placeholder="name" required>
+		      		</div>
+		      		<div class="form-group">
+		      			<input type="text" class="form-control rounded-left" placeholder="email" required>
+		      		</div>
+	            <div class="form-group d-flex">
+	              <input type="password" class="form-control rounded-left" placeholder="Password" required>
+	            </div>
+	            <div class="form-group d-flex">
+	              <input type="password" class="form-control rounded-left" placeholder="confirm-password" required>
+	            </div>
+	            <div class="form-group">
+	            	<button type="submit" class="form-control btn btn-primary rounded submit px-3">Register</button>
+	            </div>
+	            <div class="form-group d-md-flex">
+	            	<div class="w-50">
+	            		<label class="checkbox-wrap checkbox-primary">Remember Me
+									  <input type="checkbox" checked>
+									  <span class="checkmark"></span>
+									</label>
+								</div>
+								<div class="w-50 text-md-right">
+									<a href="#">Forgot Password</a>
+								</div>
+	            </div>
+	          </form>
+	        </div>
+				</div>
+			</div>
+		</div>
+	</section> {% endcomment %}
+
+	{% comment %} <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/popper.js' %}"></script>
+  <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+
+	</body>
+</html> {% endcomment %}
+

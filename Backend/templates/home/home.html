@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block styles %}
+<style>
+    .navbar {
+        background-color: red; 
+    }
+
+    .navbar-brand, .nav-link {
+        color: #fff; /* White text */
+    }
+
+    .jumbotron {
+        background-image: url('{% static "carwash.jpg" %}'); /* Background image */
+        background-size: cover;
+        color: #fff; /* White text */
+        text-align: center;
+        padding: 100px 0;
+        margin-bottom: 0;
+    }
+
+    .feature {
+        padding: 50px 0;
+        background-color: #fff;
+        text-align: center;
+    }
+
+    .feature h2 {
+        color: #17a2b8; /* Car wash blue */
+    }
+
+    .feature p {
+        color: #555;
+    }
+</style>
+{% endblock %}
+
+{% block content %} 
+<nav class="container navbar navbar-expand-lg navbar-light   p-3">
+    <a class="navbar-brand" href="#">Home</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}">logout</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">user Profile</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="jumbotron">
+    <h1>Welcome to our Car Wash Service!</h1>
+    <p>Get your car sparkling clean with our professional car wash service.</p>
+    <button class="btn btn-primary btn-lg">Book Now</button>
+</div>
+
+<div class="feature">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/car-wash-detailing-station_1303-22322.jpg?w=996&t=st=1708146440~exp=1708147040~hmac=ef66f87c2fa51c479645818088f0f1e2b657b7d2f07e8d32ded8436c5bdf059d" alt="Feature 1" class="img-fluid mb-3">
+                <h2>Convenient Locations</h2>
+                <p>We have multiple locations for your convenience.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/professional-washer-blue-uniform-washing-luxury-car-with-water-gun-open-air-car-wash_496169-333.jpg?size=626&ext=jpg&ga=GA1.1.179758346.1707455264&semt=ais" alt="Feature 2" class="img-fluid mb-3">
+                <h2>Professional Service</h2>
+                <p>Our team consists of experienced professionals dedicated to providing the best service.</p>
+            </div>
+            <div class="col-md-4">
+                <img src="https://img.freepik.com/free-photo/close-up-car-care-washing_23-2149172897.jpg?w=996&t=st=1708146462~exp=1708147062~hmac=56bc53dca2440b6427214f3d6049f04cf94027192bb9b41899fa31602aebec82" alt="Feature 3" class="img-fluid mb-3">
+                <h2>Affordable Prices</h2>
+                <p>Enjoy top-quality service at affordable prices.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

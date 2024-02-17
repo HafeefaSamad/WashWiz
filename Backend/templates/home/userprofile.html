@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}User Profile{% endblock %}
+
+{% block content %} 
+<div class="container mt-5">
+    <h1>User Profile</h1>
+    <div class="row">
+        <p> Email : {{user.email}} </p>
+        <p> first name : {{user.first_name}} </p>
+        <p> last name : {{user.last_name}} </p>
+        <p> city : {{user.city}} </p>
+        <p> Phone : {{user.Phone_number}} </p>
+        <div class="col-md-6">
+            
+            <form id="userprofile_form" class="form" method="post" action="{% url 'profile' %}">
+                {% csrf_token %}
+                {{ form.as_p }} 
+                <input type="submit" class="btn btn-outline-info" value="Update">
+            </form>
+        </div>
+        
+    </div>
+</div>
+{% endblock %}
