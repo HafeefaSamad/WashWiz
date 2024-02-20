@@ -4,9 +4,11 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.shortcuts import render, redirect
-from .forms import RegistrationForm,LoginForm,ForgotForm, ResetForm, UserProfileForm
+from .forms import RegistrationForm,LoginForm,ForgotForm, ResetForm, UserProfileForm, OtpForm
 from apps.accounts.models import Account
-from django.core.exceptions import ObjectDoesNotExist
+from django.conf import settings
+from django.core.mail import send_mail
+import pyotp
 
 
 def Register(request):
@@ -19,7 +21,17 @@ def Register(request):
             raw_pass = form.cleaned_data.get('password')
             user = Account.objects.create_user(email=email,password=raw_pass,username=username)
             user.save()
-            return redirect('login')
+
+            subject='Car wash'
+            totp = pyotp.TOTP(pyotp.random_base32())
+            otp = totp.now()
+            request.session['generated_otp'] = otp # put values in session
+            message=f'Your registeration otp is {otp} '
+            recipient=user.email
+            print(otp, recipient)
+            send_mail(subject,message,settings.EMAIL_HOST_USER,[recipient],fail_silently=False)
+            # return redirect('login')
+            return redirect('otp',user.id)
         else:
             messages.error(request, "Please Correct Below Errors")
             context['registration_form'] = form
@@ -43,7 +55,7 @@ def login_user(request):
                 else:
                     messages.error(request, 'Invalid email or password.')
             else:
-                messages.error(request, 'Form is not valid.')  # Handle invalid form submission
+                messages.error(request, 'Form is not valid.') 
 
         except Exception as e:
             messages.error(request, f'An error occurred: {str(e)}')
@@ -106,8 +118,35 @@ def userprofile(request):
         
             form.save()
     else:
-        form = UserProfileForm(instance=user)  # Populate the form with existing user data
+        form = UserProfileForm(instance=user) 
     return render(request, 'home/userprofile.html', {"form": form})
+
+def Verify_otp(request, id):
+    user = Account.objects.get(id=id)
+    otp = request.session.get('generated_otp')
+    print(type(otp),'sdefsdf')
+    if request.method == "POST":
+        form = OtpForm(request.POST)
+        if form.is_valid():
+            otp_input = form.cleaned_data.get('otp')
+            print(type(otp_input), "sdflkbfk")
+            print(otp == otp_input)
+            if otp == str(otp_input):
+                user.is_active = True  
+                user.save()
+                messages.success(request, 'Your Account is Activated, now you can Login.')
+                return redirect('login')  
+            else:
+                messages.error(request, 'Invalid otp, Please try again.')
+                return redirect('otp', id=id) 
+    else:
+        form = OtpForm()
+        return render(request, 'otp.html', {'form': form})
+
+
+
+    
+    
 
                 
 

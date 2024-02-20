@@ -3,23 +3,47 @@
 {% block title %}User Profile{% endblock %}
 
 {% block content %} 
+
 <div class="container mt-5">
-    <h1>User Profile</h1>
+    <h1 class="text-center mb-4">User Profile</h1>
     <div class="row">
-        <p> Email : {{user.email}} </p>
-        <p> first name : {{user.first_name}} </p>
-        <p> last name : {{user.last_name}} </p>
-        <p> city : {{user.city}} </p>
-        <p> Phone : {{user.Phone_number}} </p>
         <div class="col-md-6">
-            
-            <form id="userprofile_form" class="form" method="post" action="{% url 'profile' %}">
-                {% csrf_token %}
-                {{ form.as_p }} 
-                <input type="submit" class="btn btn-outline-info" value="Update">
-            </form>
+            <div class="user-info">
+                <h4>User Information</h4>
+                <hr>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>First Name:</strong> {{ user.first_name }}</p>
+                <p><strong>Last Name:</strong> {{ user.last_name }}</p>
+                <p><strong>City:</strong> {{ user.city }}</p>
+                <p><strong>Phone:</strong> {{ user.Phone_number }}</p>
+            </div>
         </div>
-        
+        <div class="col-md-6">
+            <div class="user-update">
+                <h4>Update Profile</h4>
+                <hr>
+                <form id="userprofile_form" class="form" method="post" action="{% url 'profile' %}">
+                    {% csrf_token %}
+                    {{ form.as_p }} 
+                    <input type="submit" class="btn btn-primary btn-block mt-3" value="Update">
+                </form>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+    .user-info, .user-update {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+    .user-info h4, .user-update h4 {
+        color: #007bff;
+        margin-bottom: 15px;
+    }
+</style>
+
 {% endblock %}
+

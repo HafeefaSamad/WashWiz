@@ -1,0 +1,16 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}OTP{% endblock  %}
+
+{% block content %}
+<div class="container jumbotron text-justify">
+    <h1 class="display-4">Enter Your otp</h1>
+    <form id="verification_form" class="form" method="post" action="{% url 'otp' id=user.id %}">
+        {% csrf_token %}
+        {{ form.as_p }} 
+        <input type="submit" class="btn btn-outline-info" value="Login">
+    </form>
+</div>
+{% endblock %}

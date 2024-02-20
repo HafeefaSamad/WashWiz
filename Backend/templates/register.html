@@ -3,25 +3,30 @@
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="container jumbotron">
+<div class="container py-5">
     {% if registered %}
-        <strong>Thank You for Registering with Us.</strong>
-        <a href="{% url 'index' %}" class="btn-link btn">Return to the HomePage</a><br>
+        <div class="alert alert-success" role="alert">
+            <strong>Thank You for Registering with Us.</strong>
+            <a href="{% url 'index' %}" class="btn btn-link">Return to the HomePage</a>
+        </div>
     {% else %}
-        <strong class="display-3 mb-4">Register Here... </strong>
-        <form action="{% url 'register' %}" class="pt-3" method="POST">
-            {% csrf_token %}
-            {{ registration_form.as_p }}
-            <input type="submit" name="submit" value="Register" class="btn btn-success">
-            <a class="p-2 m-1" href="{% url 'login' %}">Already a Member? 
-                {# <a href="{% url 'login' %}">Sign In Here...</a> #}
-			</a>
-        </form>
+        <div class="card mx-auto" style="max-width: 400px;">
+            <div class="card-body">
+                <h1 class="card-title text-center mb-4">Register Here</h1>
+                <form action="{% url 'register' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ registration_form.as_p }}
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Register</button>
+                    <p class="mt-3 mb-0 text-center">Already a Member? <a href="{% url 'login' %}">Sign In Here</a></p>
+                </form>
+            </div>
+        </div>
     {% endif %}
 </div>
 {% endblock %}
 
-{% load static %}
 
 
 

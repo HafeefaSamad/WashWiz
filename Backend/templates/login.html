@@ -1,19 +1,39 @@
-
 {% extends 'base.html' %}
 {% load static %}
 
 {% block title %}Login{% endblock  %}
 
 {% block content %}
-<div class="container jumbotron text-justify">
-    <h1 class="display-4">Login Here</h1>
-    <form id="login_form" class="form" method="post" action="{% url 'login' %}">
-        {% csrf_token %}
-        {{ form.as_p }} 
-        <input type="submit" class="btn btn-outline-info" value="Login">
-    </form>
-    <p><a class="px-2 mx-2 btn btn-link text-decoration-none" href="{% url 'register' %}">Not a Member?</a></p>
-    <p><a class="px-2 mx-2 btn btn-link text-decoration-none" href="{% url 'forgot' %}">Forgot Password</a></p>
-
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Login Here</h1>
+                    <form id="login_form" class="form" method="post" action="{% url 'login' %}">
+                        {% csrf_token %}
+                        <div class="form-group row">
+                            <label for="id_email" class="col-sm-3 col-form-label">Email:</label>
+                            <div class="col-sm-9">
+                                {{ form.email }}
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="id_password" class="col-sm-3 col-form-label">Password:</label>
+                            <div class="col-sm-9">
+                                {{ form.password }}
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block mt-3">Login</button>
+                    </form>
+                    <p class="text-center mt-3">
+                        <a class="btn btn-link" href="{% url 'register' %}">Not a Member?</a>
+                        <span class="mx-2">|</span>
+                        <a class="btn btn-link" href="{% url 'forgot' %}">Forgot Password</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock %}

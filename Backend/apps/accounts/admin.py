@@ -5,7 +5,7 @@ from . models import Account
 
 
 class AcoountAdmin(admin.ModelAdmin):
-    list_display = ['email' , 'username', 'Phone_number']
+    list_display = ['email' , 'username', 'Phone_number','id']
 
 
 admin.site.register(Account, AcoountAdmin)

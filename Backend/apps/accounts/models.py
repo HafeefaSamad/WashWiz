@@ -1,7 +1,7 @@
 
 
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager , AbstractUser
 
 class MyUserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -50,7 +50,7 @@ class Account(AbstractBaseUser):
     objects = MyUserManager()
 
     def __str__(self):
-        return self.email
+        return f"{self.email}"
 
     def has_perm(self, perm, obj=None):
         return self.is_admin
