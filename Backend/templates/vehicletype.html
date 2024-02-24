@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %} 
+<body>
+    <h1>Select Vehicle Type</h1>
+
+            {% for vehicle in vehicletypes %}
+            <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{vehicle.vehicle_type}}</h5>
+    <a href="{% url 'variation' vehicle.id %}" class="btn btn-primary">Book Now</a>
+  </div>
+</div>
+            {% endfor %}
+        </select>
+</body>
+{% endblock %} 

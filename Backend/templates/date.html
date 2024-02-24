@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Date{% endblock %}
+
+{% block content %} 
+{% comment %} <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Date</h1>
+                    {% for d in date %}
+                    {{d}}
+                    {% endfor %}
+                    <form class="form" method="post" action="{% url 'date' %}">
+                        {% csrf_token %} 
+                        {{ form.as_p }} 
+                        <button type="submit" class="btn btn-outline-info btn-block mt-3">Submit</button>
+                    </form> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+{% comment %} <div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Dates</h1>
+                    {% for d in date %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            {{ d }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div> {% endcomment %}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title text-center">Select Date and Time Slot</h1>
+                    <form method="post">
+                        {% csrf_token %}
+                        {{ date.as_p }}
+                        {{ form.slot }}
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+

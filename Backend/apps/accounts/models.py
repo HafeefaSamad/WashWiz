@@ -53,7 +53,7 @@ class Account(AbstractBaseUser):
         return f"{self.email}"
 
     def has_perm(self, perm, obj=None):
-        return self.is_admin
+        return True
 
     def has_module_perms(self, app_label):
         return True

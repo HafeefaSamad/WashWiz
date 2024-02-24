@@ -12,20 +12,20 @@ import pyotp
 
 
 def Register(request):
-    context = {}
+    
     if request.method == 'POST': 
         form = RegistrationForm(request.POST)
         if form.is_valid():
             email = form.cleaned_data.get('email')
             username = form.cleaned_data.get('username')
-            raw_pass = form.cleaned_data.get('password')
-            user = Account.objects.create_user(email=email,password=raw_pass,username=username)
+            password = form.cleaned_data.get('password')
+            user = Account.objects.create_user(email=email,password=password,username=username)
             user.save()
 
             subject='Car wash'
             totp = pyotp.TOTP(pyotp.random_base32())
             otp = totp.now()
-            request.session['generated_otp'] = otp # put values in session
+            request.session['generated_otp'] = otp 
             message=f'Your registeration otp is {otp} '
             recipient=user.email
             print(otp, recipient)
@@ -34,11 +34,11 @@ def Register(request):
             return redirect('otp',user.id)
         else:
             messages.error(request, "Please Correct Below Errors")
-            context['registration_form'] = form
+           
     else:
-        form = RegistrationForm()
-        context['registration_form'] = form
-    return render(request, 'register.html', context)
+        form = RegistrationForm()   
+        
+    return render(request, 'register.html', {'registration_form':form})
 
 def login_user(request):
     if request.method == 'POST': 
@@ -64,9 +64,10 @@ def login_user(request):
         form = LoginForm() 
     return render(request, 'login.html', {'form': form})
 
+
 def logout_user(request):
     logout(request)
-    return redirect('login')
+    return redirect('home')
 
 def forgot_password(request):
     if request.method == 'POST':

@@ -48,9 +48,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
                 </li>
+                {% if user.id is None %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">login</a>
+                </li>
+                {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">logout</a>
                 </li>
+                {% endif %}
+                
                 <li class="nav-item">
                     <a class="nav-link" href="{% url "profile" %}">user Profile</a>
                 </li>
@@ -61,7 +68,7 @@
     <div class="container jumbotron">
         <h1>Welcome to our Car Wash Service!</h1>
         <p>Get your car sparkling clean with our professional car wash service.</p>
-        <button class="btn btn-primary btn-lg">Book Now</button>
+        <a href=""><button class="btn btn-primary btn-lg">Book Now</button></a>
     </div>
 </div>
 <div class="feature">
@@ -69,8 +76,8 @@
         <div class="row">
             <div class="col-md-4">
                 <img src="https://img.freepik.com/free-photo/car-wash-detailing-station_1303-22322.jpg?w=996&t=st=1708146440~exp=1708147040~hmac=ef66f87c2fa51c479645818088f0f1e2b657b7d2f07e8d32ded8436c5bdf059d" alt="Feature 1" class="img-fluid mb-3">
-                <h2>Convenient Locations</h2>
-                <p>We have multiple locations for your convenience.</p>
+                <h2>Convenient spaces</h2>
+                <p>We have multiple spaces for your convenience.</p>
             </div>
             <div class="col-md-4">
                 <img src="https://img.freepik.com/free-photo/professional-washer-blue-uniform-washing-luxury-car-with-water-gun-open-air-car-wash_496169-333.jpg?size=626&ext=jpg&ga=GA1.1.179758346.1707455264&semt=ais" alt="Feature 2" class="img-fluid mb-3">
@@ -85,4 +92,12 @@
         </div>
     </div>
 </div>
+
+<div class= 'row justify-content-center'>
+    <div class='col-md-6 col-sm-6'>
+    {% include "category.html" %}
+    </div>
+</div>
+
+
 {% endblock %}

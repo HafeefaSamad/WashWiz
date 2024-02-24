@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %} 
+<body>
+    <h1>Select Variations</h1>
+
+            {% for variation in variations %}
+            <div class="card" style="width: 18rem;">
+  <img class="card-img-top" src="..." alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">{{variation.vehicle_type}}</h5>
+    <h5 class="card-title">{{variation.package}}</h5>
+    <h5 class="card-title">{{variation.price}}</h5>
+    <a href="{% url 'date' %}" class="btn btn-primary">Select Date</a>
+  </div>
+</div>
+            {% endfor %}
+        </select>
+</body>
+{% endblock %} 

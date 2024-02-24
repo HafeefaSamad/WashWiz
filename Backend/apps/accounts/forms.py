@@ -10,17 +10,17 @@ class RegistrationForm(forms.ModelForm):
         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
         required=True,
     )
-    password = forms.CharField(
-    label="Password",
-
-    widget=forms.PasswordInput(
-        attrs={'placeholder':'Enter Password', 'class':'form-control'}
+    password = forms.CharField( 
+        label="Password",
+        widget=forms.PasswordInput(
+            attrs={'placeholder':'Enter Password', 'class':'form-control'}
+        )
     )
-)
-
+    
     class Meta:
         model = Account
-        fields=('username' ,'email','password','confirm_password') 
+        fields = ('username', 'email', 'password', 'confirm_password') 
+
 
 
 # class RegistrationForm(forms.ModelForm):
@@ -29,37 +29,37 @@ class RegistrationForm(forms.ModelForm):
 #         widget=forms.PasswordInput(attrs={'class': 'form-control'}),
 #         required=True,
 #     )
-#     password = forms.CharField(
+#     password = forms.CharField( 
 #         label="Password",
-#         widget=forms.PasswordInput(attrs={'placeholder':'Enter Password', 'class':'form-control'})
+#         widget=forms.PasswordInput(
+#             attrs={'placeholder':'Enter Password', 'class':'form-control'}
+#         )
 #     )
-
+    
 #     class Meta:
 #         model = Account
-#         fields = ['username', 'email']
+#         fields = ('username', 'email', 'password', 'confirm_password') 
+        
+#     def clean_password(self):
+#         password = self.cleaned_data.get('password')
+#         if not any(char.isupper() for char in password):
+#             raise ValidationError('Password must contain at least one uppercase letter')
+#         if not any(char in '!@#$%^&*(),.?":{}|<>' for char in password):
+#             raise ValidationError('Password must contain at least one special character')
+#         if len(password) >6 :
+#             raise ValidationError('Password length must be at least 6 characters')
+#         return password
 
 #     def clean(self):
 #         cleaned_data = super().clean()
-#         password = cleaned_data.get("password")
-#         confirm_password = cleaned_data.get("confirm_password")
-
-#         if password and confirm_password and password != confirm_password:
-#             raise ValidationError("Passwords do not match")
-
-#         if password:
-#             if not any(char.isdigit() for char in password):
-#                 raise ValidationError("Password must contain at least one digit")
-#             if not any(char.isupper() for char in password):
-#                 raise ValidationError("Password must contain at least one uppercase letter")
-#             if not any(char.islower() for char in password):
-#                 raise ValidationError("Password must contain at least one lowercase letter")
-#             if not any(char in "!@#$%^&*()" for char in password):
-#                 raise ValidationError("Password must contain at least one special character")
-#             if len(password) < 8:
-#                 raise ValidationError("Password must be at least 8 characters long")
-
+#         print(cleaned_data, '5555555555555555555555555555')
+#         password = cleaned_data.get('password')
+#         confirm_password = cleaned_data.get('confirm_password')
+        
+#         if password != confirm_password:
+#             raise ValidationError({'confirm_password': 'Passwords do not match'})
+        
 #         return cleaned_data
-
 
 
 class LoginForm(forms.Form):

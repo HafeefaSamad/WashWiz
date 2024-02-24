@@ -1,4 +1,4 @@
- {% extends "base.html" %}
+ {% comment %} {% extends "base.html" %}
 {% load static %}
 
 {% block styles %}
@@ -16,7 +16,7 @@
 {% block content %} 
 <div class="container">
     <nav class="container navbar navbar-expand-lg navbar-light   p-3">
-        <a class="navbar-brand" href="#">Home</a>
+        <a class="navbar-brand" href="{% url 'home' %}">Home</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -24,6 +24,9 @@
             <ul class="navbar-nav">
                 <li class="nav-item">
                     <a class="nav-link" href="#">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'login' %}">login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'logout' %}">logout</a>
@@ -34,4 +37,4 @@
             </ul>
         </div>
     </nav>
-    {% endblock %} 
+    {% endblock %}  {% endcomment %}
