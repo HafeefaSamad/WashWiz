@@ -1,9 +1,15 @@
 from django import forms
-from datetime import datetime,timedelta
+from datetime import datetime,timedelta,date
 from .models import Slot
 
 
-class DateSelectionForm(forms.Form):
+class DateSelectionForm(forms.ModelForm):
+    
+    date_choices = [(date.today() + timedelta(days=i), (date.today() + timedelta(days=i)).strftime('%Y-%m-%d')) for i in range(6)]
+    date = forms.DateField(widget=forms.Select(choices=date_choices))
+    class Meta:
+        model=Slot
+        fields=('date',)
     # Timeslot = (
     #     (0,'9-10'),
     #     (0,'10-11'),
@@ -14,8 +20,6 @@ class DateSelectionForm(forms.Form):
     #     (0,'4-5'),
 
     # )
-    date_choices = [(datetime.today() + timedelta(days=i), (datetime.today() + timedelta(days=i)).strftime('%Y-%m-%d')) for i in range(6)]
-    date = forms.DateField(widget=forms.Select(choices=date_choices))
     # slot_choices = [(slot.timeslot) for slot in Slot.objects.all()]
     # slot = forms.ChoiceField(choices=slot_choices, widget=forms.Select())
     

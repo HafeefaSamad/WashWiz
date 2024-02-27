@@ -143,6 +143,8 @@ def Verify_otp(request, id):
     else:
         form = OtpForm()
         return render(request, 'otp.html', {'form': form})
+    
+
 
 
 

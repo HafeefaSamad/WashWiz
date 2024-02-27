@@ -31,22 +31,21 @@ class Variation(models.Model):
         return f"{self.vehicle_type}, {self.package}"
     
 
-    
 class Slot(models.Model):
-    Timeslot = (
-        (0,'9-10'),
-        (0,'10-11'),
-        (0,'11-12'),
-        (0,'12-1'),
-        (0,'2-3'),
-        (0,'3-4'),
-        (0,'4-5'),
-
+    TIMESLOT_CHOICES = (
+        (0, '9-10'),
+        (1, '10-11'),
+        (2, '11-12'),
+        (3, '12-1'),
+        (4, '2-3'),
+        (5, '3-4'),
+        (6, '4-5'),
     )
-    date = models.DateField(null =True,blank=True)
-    timeslot =models.IntegerField(choices=Timeslot,null=True,blank=True)
-    is_available =models.BooleanField(default=True)
-    def __str__(self):
-        return f"{self.timeslot}, {self.date}"
 
+    date = models.DateField(null=True, blank=True)
+    timeslot = models.IntegerField(choices=TIMESLOT_CHOICES, null=True, blank=True)
+    is_available = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.get_timeslot_display()}, {self.date}"
     

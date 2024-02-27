@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .forms import DateSelectionForm
 from .models import VehicleType, Variation,Slot
 from .models import Category
@@ -18,11 +18,25 @@ def Selectvariation(request,id):
     variation = Variation.objects.filter(vehicle_type=id)
     return render(request, 'variation.html', {'variations':variation})
 
+# def SelectDate(request):
+#     form =DateSelectionForm()
+#     if form.is_valid():
+#         date = form.cleaned_data.get('date')
+
+#     return render(request, 'date.html', {'date': form})
+
 def SelectDate(request):
-    form =DateSelectionForm()
-    slot_choices = [(slot.timeslot, slot.get_timeslot_display()) for slot in Slot.objects.filter(is_available=True)]
-    form.fields['slot'] = forms.ChoiceField(choices=slot_choices, widget=forms.Select())
-
-    return render(request, 'date.html',{'date':form})
-
-
+    if request.method == 'POST':
+        form = DateSelectionForm(request.POST)
+        print('ho')
+        if form.is_valid():
+            print(form)
+            print(form.cleaned_data.get('date'),'kk ')
+            date = form.cleaned_data.get('date' ,)
+            for timeslot_choice in Slot.TIMESLOT_CHOICES:
+                Slot.objects.create(date=date )
+            return redirect('home')
+    else:
+        form = DateSelectionForm()
+    
+    return render(request, 'date.html', {'date': form})
